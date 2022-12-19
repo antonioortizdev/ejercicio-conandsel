@@ -23,8 +23,6 @@ const categories = [
   },
 ];
 
-// TO-DO: Implement this function
-
 const getCategoryPath = (categories, categoryName) => {
   const traverseCategories = (categories, targetName) => {
     for (const category of categories) {
