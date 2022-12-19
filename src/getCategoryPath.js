@@ -1,4 +1,4 @@
-const getCategoryPath = (categories, categoryName) => {
+const getCategoryPath = (categories, categoryName, separator = "/") => {
   const traverseCategories = (categories, targetName) => {
     for (const category of categories) {
       if (category.name === targetName) {
@@ -17,7 +17,7 @@ const getCategoryPath = (categories, categoryName) => {
   }
 
   const buildCategoryPath = (categories) => {
-    return `/${categories.map(({ name }) => name).join("/")}`;
+    return `${separator}${categories.map(({ name }) => name).join(separator)}`;
   };
 
   const categoryPath = traverseCategories(categories, categoryName);

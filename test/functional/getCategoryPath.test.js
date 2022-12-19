@@ -37,4 +37,12 @@ describe('getCategoryPath functional test', () => {
   it("passes 'category5' and outputs '/category5'", () => {
     expect(getCategoryPath(categoriesMock, "category5")).toBe("/category5")
   });
+  
+  it("passes 'category4' with '\\' as separator and outputs '\\category1\\category3\\category4'", () => {
+    expect(getCategoryPath(categoriesMock, "category4", "\\")).toBe("\\category1\\category3\\category4")
+  });
+  
+  it("passes 'category4' with '-' as separator and outputs '\\category1\\category3\\category4'", () => {
+    expect(getCategoryPath(categoriesMock, "category4", "-")).toBe("-category1-category3-category4")
+  });
 })

@@ -46,4 +46,15 @@ describe("getCategoryPath unit test", () => {
     expect(getCategoryPath(categories, "Rock")).toEqual("/Music/Rock");
     expect(getCategoryPath(categories, "Foo")).toBeNull();
   })
+  it('should return the correct category path using a separator', () => {
+    expect(getCategoryPath(categories, "Mystery", "\\")).toEqual(
+      "\\Books\\Fiction\\Mystery"
+    );
+    expect(getCategoryPath(categories, "Technology", "\\")).toEqual(
+      "\\Books\\Non-Fiction\\Technology"
+    );
+    expect(getCategoryPath(categories, "Self-Help", "-")).toEqual(
+      "-Books-Non-Fiction-Self-Help"
+    );
+  })
 });
