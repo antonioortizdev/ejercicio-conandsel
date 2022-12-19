@@ -4,14 +4,15 @@ const getCategoryPath = (categories, categoryName) => {
       if (category.name === targetName) {
         return category;
       }
-      if (category.subcategories) {
-        for (const subcategory of category.subcategories) {
-          subcategory.parent = category;
-        }
-        const found = traverseCategories(category.subcategories, targetName);
-        if (found) {
-          return found;
-        }
+      if (!category.subcategories) {
+        continue;
+      }
+      for (const subcategory of category.subcategories) {
+        subcategory.parent = category;
+      }
+      const found = traverseCategories(category.subcategories, targetName);
+      if (found) {
+        return found;
       }
     }
     return null;
