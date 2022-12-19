@@ -2,33 +2,29 @@ const getCategoryPath = (categories, categoryName) => {
   const traverseCategories = (categories, targetName) => {
     for (const category of categories) {
       if (category.name === targetName) {
-        return category;
+        return [category];
       }
       if (!category.subcategories) {
         continue;
       }
-      for (const subcategory of category.subcategories) {
-        subcategory.parent = category;
-      }
       const found = traverseCategories(category.subcategories, targetName);
       if (found) {
+        found.unshift(category);
         return found;
       }
     }
     return null;
   }
 
-  const category = traverseCategories(categories, categoryName);
-  if (!category) {
+  const buildCategoryPath = (categories) => {
+    return `/${categories.map(({ name }) => name).join("/")}`;
+  };
+
+  const categoryPath = traverseCategories(categories, categoryName);
+  if (!categoryPath) {
     return null;
   }
-  let path = category.name;
-  let parent = category.parent;
-  while (parent) {
-    path = `${parent.name}/${path}`;
-    parent = parent.parent;
-  }
-  return `/${path}`;
+  return buildCategoryPath(categoryPath);
 };
 
-module.exports = getCategoryPath
+module.exports = getCategoryPath;
